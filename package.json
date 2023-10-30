@@ -8,7 +8,7 @@
 		{
 			"displayName":"Basic Usage",
 			"description":"Muestra sencilla de cómo usar el paquete en un proyecto.",
-			"path":"Samples~/IsostopyScenePackage.Sample"
+			"path":"Samples/IsostopyScenePackage.Sample"
 		}
 	]
 }
