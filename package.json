@@ -2,5 +2,12 @@
 	"name": "com.isostopy.scene-package",
 	"displayName": "Isostopy's Scene Package",
 	"version":"1.1.1",
-	"description": "Paquete con el que manejamos el cambio de escenas en todos los proyectos. Permite cambiar de escena usando un fade o una pantalla de carga."
+	"description": "Paquete con el que manejamos el cambio de escenas en todos los proyectos. Permite cambiar de escena usando un fade o una pantalla de carga.",
+	"samples":[
+		{
+			"displayName":"Basic Usage",
+			"description":"Muestra sencilla de como usar el paquete en un proyecto.",
+			"path":"Sample"
+		}
+	]
 }
