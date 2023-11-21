@@ -87,12 +87,12 @@ public class EditorSceneLoader : EditorWindow
 
 	/// <summary> Cargar la escena indicada. El string tiene que tener un aspecto como: "Assets/.../SceneName.unity". </summary>
 	/// <returns> TRUE si se ha cargado la escena con exito. </returns>
-	bool LoadScene(string scene)
+	public static bool LoadScene(string scenePath)
 	{
 		// Si ya estamos en play cargar la escena por la via del PlayMode.
 		if (UnityEditor.EditorApplication.isPlaying)
 		{
-			SceneManager.LoadScene(scene);
+			SceneManager.LoadScene(scenePath);
 			return true;
 		}
 		// Preguntar si guardar la escena, y no hacer nada si se le da a Cancelar.
@@ -100,7 +100,7 @@ public class EditorSceneLoader : EditorWindow
 			if (EditorSceneManager.SaveCurrentModifiedScenesIfUserWantsTo() == false)
 				return false;
 		
-		EditorSceneManager.OpenScene(scene);
+		EditorSceneManager.OpenScene(scenePath);
 		return true;
 	}
 

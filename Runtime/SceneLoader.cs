@@ -2,14 +2,13 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-using UnityEditor;
-
+#if UNITY_EDITOR
+	using UnityEditor;
+#endif
 
 /// <summary>
 /// Componente que hace de intermediario entre la escena y el IsosSceneManager (que es persistente). </summary>
-/// 
-/// En otros proyectos esta funcion la cumple SceneGeneric.
-/// 
+
 [AddComponentMenu("Isostopy/Scene Package/Scene Loader")]
 public class SceneLoader : MonoBehaviour
 {
@@ -17,14 +16,16 @@ public class SceneLoader : MonoBehaviour
 
 	/// <summary> Si tiene o no que cargar la siguiente escena automaticamente en el Start(). </summary>
 	[Space][SerializeField] bool loadOnStart = false;
+
 	/// <summary> El nombre de la escena a cargar automaticamente. </summary>
 	[SerializeField] string targetScene = "";
+
 	/// <summary> El tiempo que espera antes de cargar la escena automaticamente. </summary>
 	[Min(0)][SerializeField] float delay = 0;
 	/// <summary> Si tiene o no que hacer fade antes de cargar otra escena. </summary>
 	[SerializeField] bool useFade = true;
 	/// <summary> Si tiene o no que pasar por la pantalla de carga antes de cargar la escena automaticamente. </summary>
-	[SerializeField] bool useLoadingScreen = true;
+	[SerializeField] bool useLoadingScreen = false;
 
 
 	// ---------------------------------------------
@@ -82,6 +83,9 @@ public class SceneLoader : MonoBehaviour
 			LoadSceneWithoutManager(scene);
 	}
 
+	public void LoadScene(SceneReference sceneReference) => LoadScene(sceneReference.sceneName);
+
+
 	/// <summary>
 	/// Llama al IsosSceneManager para que cargue la escena indicada pasando por la pantalla de carga. </summary>
 	public void LoadSceneAsync(string scene)
@@ -92,6 +96,9 @@ public class SceneLoader : MonoBehaviour
 			LoadSceneWithoutManager(scene);
 	}
 	
+	public void LoadSceneAsync(SceneReference sceneReference) => LoadSceneAsync(sceneReference.sceneName);
+
+
 	/// <summary>
 	/// Llama al IsosSceneManager para que cargue la escena indicada con un fade. </summary>
 	public void FadeToScene(string scene)
@@ -102,6 +109,9 @@ public class SceneLoader : MonoBehaviour
 			LoadSceneWithoutManager(scene);
 	}
 
+	public void FadeToScene(SceneReference sceneReference) => FadeToScene(sceneReference.sceneName);
+
+
 	/// <summary>
 	/// Llama al IsosSceneManager para que cargue la escena indicada con un fade y la pantalla de carga. </summary>
 	public void FadeToSceneAsync(string scene)
@@ -111,6 +121,9 @@ public class SceneLoader : MonoBehaviour
 		else
 			LoadSceneWithoutManager(scene);
 	}
+
+	public void FadeToSceneAsync(SceneReference sceneReference) => FadeToSceneAsync(sceneReference.sceneName);
+
 
 	/// <summary>
 	/// Carga la escena objetivo sin mas, sin manager, ni fade, ni nada. </summary>
