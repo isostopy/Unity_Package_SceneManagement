@@ -2,10 +2,6 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-#if UNITY_EDITOR
-	using UnityEditor;
-#endif
-
 /// <summary>
 /// Componente que hace de intermediario entre la escena y el IsosSceneManager (que es persistente). </summary>
 
@@ -15,10 +11,14 @@ public class SceneLoader : MonoBehaviour
 	IsosSceneManager manager = null;
 
 	/// <summary> Si tiene o no que cargar la siguiente escena automaticamente en el Start(). </summary>
-	[Space][SerializeField] bool loadOnStart = false;
+	[Space][SerializeField] bool loadOnStart = true;
 
+	/// <summary> ¿Usamos el nombre de la escena o una referencia e para cargar la escena automaticamente? </summary>
+	[SerializeField] bool useSceneReference = false;
+	/// <summary> Referencia a la escena que cargar automaticamente. </summary>
+	[SerializeField] SceneReference targetSceneReference = null;
 	/// <summary> El nombre de la escena a cargar automaticamente. </summary>
-	[SerializeField] string targetScene = "";
+	[SerializeField] string targetSceneName = "";
 
 	/// <summary> El tiempo que espera antes de cargar la escena automaticamente. </summary>
 	[Min(0)][SerializeField] float delay = 0;
@@ -37,7 +37,7 @@ public class SceneLoader : MonoBehaviour
 		manager = FindObjectOfType<IsosSceneManager>();
 
 		// Si se ha indicado, cargar la escena automaticamente.
-		if (loadOnStart	&& !string.IsNullOrWhiteSpace(targetScene))
+		if (loadOnStart	&& !string.IsNullOrWhiteSpace(targetSceneName))
 			StartCoroutine(LoadWithDelay());
 	}
 
@@ -54,16 +54,36 @@ public class SceneLoader : MonoBehaviour
 		if (useFade)
 		{
 			if (useLoadingScreen)
-				FadeToSceneAsync(targetScene);
+			{
+				if (useSceneReference)
+					FadeToSceneAsync(targetSceneReference);
+				else
+					FadeToSceneAsync(targetSceneName);
+			}
 			else
-				FadeToScene(targetScene);
+			{
+				if (useSceneReference)
+					FadeToScene(targetSceneReference);
+				else
+					FadeToScene(targetSceneName);
+			}
 		}
 		else
 		{
 			if (useLoadingScreen)
-				LoadSceneAsync(targetScene);
+			{
+				if (useSceneReference)
+					LoadSceneAsync(targetSceneReference);
+				else
+					LoadSceneAsync(targetSceneName);
+			}
 			else
-				LoadScene(targetScene);
+			{
+				if (useSceneReference)
+					LoadScene(targetSceneReference);
+				else
+					LoadScene(targetSceneName);
+			}
 		}
 	}
 
@@ -71,7 +91,7 @@ public class SceneLoader : MonoBehaviour
 
 
 	// ---------------------------------------------
-	#region Funciones publicas: Load Scene
+	#region Cargar escena
 
 	/// <summary>
 	/// Llama al IsosSceneManager para que cargue la escena indicada directamente. </summary>
@@ -134,48 +154,3 @@ public class SceneLoader : MonoBehaviour
 
 	#endregion
 }
-
-
-// ---------------------------------------------------------------------------------------------------------------------------------------
-#region Custom Editor
-#if UNITY_EDITOR
-
-[CustomEditor(typeof(SceneLoader))]
-[CanEditMultipleObjects]
-public class SceneLoader_editor : Editor
-{
-	SerializedProperty loadOnStart;
-	SerializedProperty targetScene;
-	SerializedProperty delay;
-	SerializedProperty useFade;
-	SerializedProperty useLoadingScreen;
-
-	public void OnEnable()
-	{
-		loadOnStart = serializedObject.FindProperty("loadOnStart");
-		targetScene = serializedObject.FindProperty("targetScene");
-		delay = serializedObject.FindProperty("delay");
-		useLoadingScreen = serializedObject.FindProperty("useLoadingScreen");
-		useFade = serializedObject.FindProperty("useFade");
-	}
-
-	public override void OnInspectorGUI()
-	{
-		serializedObject.Update();
-
-		/// Si no se va a cargar en el Start, desactivar los campos que no se van a usar.
-		EditorGUILayout.PropertyField(loadOnStart);
-		if (!loadOnStart.boolValue)
-			GUI.enabled = false;
-		EditorGUILayout.PropertyField(targetScene);
-		EditorGUILayout.PropertyField(delay);
-		EditorGUILayout.PropertyField(useFade);
-		EditorGUILayout.PropertyField(useLoadingScreen);
-		GUI.enabled = true;
-
-		serializedObject.ApplyModifiedProperties();
-	}
-}
-
-#endif
-#endregion
