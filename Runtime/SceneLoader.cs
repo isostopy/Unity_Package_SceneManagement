@@ -13,12 +13,23 @@ public class SceneLoader : MonoBehaviour
 	/// <summary> Si tiene o no que cargar la siguiente escena automaticamente en el Start(). </summary>
 	[Space][SerializeField] bool loadOnStart = true;
 
-	/// <summary> ¿Usamos el nombre de la escena o una referencia e para cargar la escena automaticamente? </summary>
+	/// Para cargar la escena automaticamente ¿Usamos un nombre o una referencia?
 	[SerializeField] bool useSceneReference = false;
-	/// <summary> Referencia a la escena que cargar automaticamente. </summary>
+	/// Referencia a la escena asignada en el editor.
 	[SerializeField] SceneReference targetSceneReference = null;
-	/// <summary> El nombre de la escena a cargar automaticamente. </summary>
+	/// El nombre de la escena asignado en el editor.
 	[SerializeField] string targetSceneName = "";
+	/// Nombre de la escena que hay que cargar automaticamente en base a lo indicado en el editor.
+	private string targetScene
+	{
+		get
+		{
+			if (useSceneReference)
+				return targetSceneReference.sceneName;
+			else
+				return targetSceneName;
+		}
+	}
 
 	/// <summary> El tiempo que espera antes de cargar la escena automaticamente. </summary>
 	[Min(0)][SerializeField] float delay = 0;
@@ -37,7 +48,7 @@ public class SceneLoader : MonoBehaviour
 		manager = FindObjectOfType<IsosSceneManager>();
 
 		// Si se ha indicado, cargar la escena automaticamente.
-		if (loadOnStart	&& !string.IsNullOrWhiteSpace(targetSceneName))
+		if (loadOnStart)
 			StartCoroutine(LoadWithDelay());
 	}
 
@@ -54,36 +65,16 @@ public class SceneLoader : MonoBehaviour
 		if (useFade)
 		{
 			if (useLoadingScreen)
-			{
-				if (useSceneReference)
-					FadeToSceneAsync(targetSceneReference);
-				else
-					FadeToSceneAsync(targetSceneName);
-			}
+				FadeToSceneAsync(targetScene);
 			else
-			{
-				if (useSceneReference)
-					FadeToScene(targetSceneReference);
-				else
-					FadeToScene(targetSceneName);
-			}
+				FadeToScene(targetScene);
 		}
 		else
 		{
 			if (useLoadingScreen)
-			{
-				if (useSceneReference)
-					LoadSceneAsync(targetSceneReference);
-				else
-					LoadSceneAsync(targetSceneName);
-			}
+				LoadSceneAsync(targetScene);
 			else
-			{
-				if (useSceneReference)
-					LoadScene(targetSceneReference);
-				else
-					LoadScene(targetSceneName);
-			}
+				LoadScene(targetScene);
 		}
 	}
 
