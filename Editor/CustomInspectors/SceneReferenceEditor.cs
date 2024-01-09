@@ -65,9 +65,9 @@ public class SceneReferenceEditor : Editor
 		EditorGUILayout.Space();
 
 		// Dibujamos un botón que carga la escena.
-		if (GUILayout.Button("Load Scene"))
+		if (GUILayout.Button("Open Scene"))
 		{
-			EditorSceneLoader.LoadScene(scenePath);
+			EditorSceneLoader.SaveAndLoadScene(scenePath);
 		}
 	}
 }
