@@ -49,7 +49,8 @@ public class SceneFader : MonoBehaviour
 
 		// El contador empieza en el punto que sea que empieza el alpha.
 		// Para que si el alpha ya esta a medio camino, el fade dure la mitad del tiempo.
-		float timeCounter = Mathf.Lerp( start * fadingTime, end * fadingTime, image.color.a );
+		//float timeCounter = Mathf.Lerp( start * fadingTime, end * fadingTime, image.color.a );
+		float timeCounter = 0;
 
 		fading = true;		
 		// Ir cambiando la transparencia de la imagen segun avance el contador de tiempo.

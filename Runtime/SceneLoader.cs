@@ -94,7 +94,7 @@ public class SceneLoader : MonoBehaviour
 			LoadSceneWithoutManager(scene);
 	}
 
-	public void LoadScene(SceneReference sceneReference) => LoadScene(sceneReference.sceneName);
+	public void LoadScene(SceneReference sceneReference) => sceneReference.LoadScene();
 
 
 	/// <summary>
@@ -107,7 +107,7 @@ public class SceneLoader : MonoBehaviour
 			LoadSceneWithoutManager(scene);
 	}
 	
-	public void LoadSceneAsync(SceneReference sceneReference) => LoadSceneAsync(sceneReference.sceneName);
+	public void LoadSceneAsync(SceneReference sceneReference) => sceneReference.LoadSceneAsync();
 
 
 	/// <summary>
@@ -120,7 +120,7 @@ public class SceneLoader : MonoBehaviour
 			LoadSceneWithoutManager(scene);
 	}
 
-	public void FadeToScene(SceneReference sceneReference) => FadeToScene(sceneReference.sceneName);
+	public void FadeToScene(SceneReference sceneReference) => sceneReference.FadeToScene();
 
 
 	/// <summary>
@@ -133,7 +133,7 @@ public class SceneLoader : MonoBehaviour
 			LoadSceneWithoutManager(scene);
 	}
 
-	public void FadeToSceneAsync(SceneReference sceneReference) => FadeToSceneAsync(sceneReference.sceneName);
+	public void FadeToSceneAsync(SceneReference sceneReference) => sceneReference.FadeToSceneAsync();
 
 
 	/// <summary>
