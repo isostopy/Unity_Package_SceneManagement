@@ -19,17 +19,6 @@ public class SceneLoader : MonoBehaviour
 	[SerializeField] SceneReference targetSceneReference = null;
 	/// El nombre de la escena asignado en el editor.
 	[SerializeField] string targetSceneName = "";
-	/// Nombre de la escena que hay que cargar automaticamente en base a lo indicado en el editor.
-	private string targetScene
-	{
-		get
-		{
-			if (useSceneReference)
-				return targetSceneReference.sceneName;
-			else
-				return targetSceneName;
-		}
-	}
 
 	/// <summary> El tiempo que espera antes de cargar la escena automaticamente. </summary>
 	[Min(0)][SerializeField] float delay = 0;
@@ -62,19 +51,45 @@ public class SceneLoader : MonoBehaviour
 			yield return new WaitForEndOfFrame();
 
 		// Cargar con las opciones indicadas.
+		if (useSceneReference)
+			LoadTargetSceneByName();
+		else
+			LoadTargetSceneByReference();
+	}
+
+	private void LoadTargetSceneByName()
+	{
 		if (useFade)
 		{
 			if (useLoadingScreen)
-				FadeToSceneAsync(targetScene);
+				FadeToSceneAsync(targetSceneName);
 			else
-				FadeToScene(targetScene);
+				FadeToScene(targetSceneName);
 		}
 		else
 		{
 			if (useLoadingScreen)
-				LoadSceneAsync(targetScene);
+				LoadSceneAsync(targetSceneName);
 			else
-				LoadScene(targetScene);
+				LoadScene(targetSceneName);
+		}
+	}
+
+	private void LoadTargetSceneByReference()
+	{
+		if (useFade)
+		{
+			if (useLoadingScreen)
+				FadeToSceneAsync(targetSceneReference);
+			else
+				FadeToScene(targetSceneReference);
+		}
+		else
+		{
+			if (useLoadingScreen)
+				LoadSceneAsync(targetSceneReference);
+			else
+				LoadScene(targetSceneReference);
 		}
 	}
 
