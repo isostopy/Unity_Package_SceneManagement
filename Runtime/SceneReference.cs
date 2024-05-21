@@ -14,7 +14,7 @@ public class SceneReference : ScriptableObject
 	#region Cargar Escena
 
 	/// <summary> Llama al IsosSceneManager para que cargue esta escena. </summary>
-	public void LoadScene()
+	public virtual void LoadScene()
 	{
 		var manager = FindObjectOfType<IsosSceneManager>();
 
@@ -25,7 +25,7 @@ public class SceneReference : ScriptableObject
 	}
 
 	/// <summary> Llama al IsosSceneManager para que cargue esta escena pasando por la panalla de carga. </summary>
-	public void LoadSceneAsync()
+	public virtual void LoadSceneAsync()
 	{
 		var manager = FindObjectOfType<IsosSceneManager>();
 
@@ -36,7 +36,7 @@ public class SceneReference : ScriptableObject
 	}
 
 	/// <summary> Llama al IsosSceneManager para que cargue esta escena usando un fade. </summary>
-	public void FadeToScene()
+	public virtual void FadeToScene()
 	{
 		var manager = FindObjectOfType<IsosSceneManager>();
 
@@ -47,7 +47,7 @@ public class SceneReference : ScriptableObject
 	}
 
 	/// <summary> Llama al IsosSceneManager para que cargue esta escena usando un fade y la pantalla de carga. </summary>
-	public void FadeToSceneAsync()
+	public virtual void FadeToSceneAsync()
 	{
 		var manager = FindObjectOfType<IsosSceneManager>();
 
@@ -58,7 +58,7 @@ public class SceneReference : ScriptableObject
 	}
 
 	/// Carga esta escena si utilizar el IsosSceneManager.
-	void LoadSceneWithoutManager()
+	protected virtual void LoadSceneWithoutManager()
 	{
 		UnityEngine.SceneManagement.SceneManager.LoadScene(sceneName);
 	}
