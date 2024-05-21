@@ -51,7 +51,7 @@ public class SceneLoader : MonoBehaviour
 			yield return new WaitForEndOfFrame();
 
 		// Cargar con las opciones indicadas.
-		if (useSceneReference)
+		if (useSceneReference == false)
 			LoadTargetSceneByName();
 		else
 			LoadTargetSceneByReference();
