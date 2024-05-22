@@ -110,6 +110,8 @@ public class IsosSceneManager : MonoBehaviour
 
 	#region Fade To Scene
 
+	Coroutine fadingRoutine = null;
+
 	/// <summary>
 	/// Carga una escena usando un fade. </summary>
 	/// <param name="useLoadingScreen"> Si se va a hacer usando la pantalla de carga. </param>
@@ -117,7 +119,7 @@ public class IsosSceneManager : MonoBehaviour
 	{
 		// Si no se puede cargar la escena o ya se esta haciendo un fade, return.
 		if (!CanLoadScene(scene)) return;
-		if (sceneFader != null && sceneFader.Fading) return;
+		//if (sceneFader != null && sceneFader.Fading) return;
 
 		// Indicar que se debe hacer fade out al llegar a la nueva escena.
 		useFadeOnLoad = true;       
@@ -129,7 +131,8 @@ public class IsosSceneManager : MonoBehaviour
 			return;
 		}
 		// Cargar la escena con un fade.
-		StartCoroutine(FadeToSceneRoutine(scene, useLoadingScreen));
+		if (fadingRoutine != null) StopCoroutine(fadingRoutine);
+		fadingRoutine = StartCoroutine(FadeToSceneRoutine(scene, useLoadingScreen));
 	}
 
 	IEnumerator FadeToSceneRoutine(string scene, bool useLoadingScreen)
