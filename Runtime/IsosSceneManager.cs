@@ -56,6 +56,10 @@ public class IsosSceneManager : MonoBehaviour
 	/// Funcion llamada siempre que se carga una nueva escena. </summary>
 	void OnSceneLoaded(Scene scene, LoadSceneMode mode)
 	{
+		// Checkear que no se este llamando a esta funcion por cargar una escena que no tiene nada que ver con este manager.
+		if (scene.name != targetScene && scene.name != loadingScene)
+			return;
+
 		// Buscar el SceneFader de la escena.
 		if (SceneFader == null)
 			FindSceneFader();
