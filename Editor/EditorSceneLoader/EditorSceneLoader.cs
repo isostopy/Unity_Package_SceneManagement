@@ -195,7 +195,7 @@ public class EditorSceneLoader : EditorWindow
 	#region Styles & Icons
 
 	// ---
-	GUIStyle _loadButtonStyle = null;
+	static GUIStyle _loadButtonStyle = null;
 	GUIStyle LoadButtonStyle
 	{
 		get
@@ -213,7 +213,7 @@ public class EditorSceneLoader : EditorWindow
 	}
 
 	// ---
-	GUIStyle _addButtonStyle = null;
+	static GUIStyle _addButtonStyle = null;
 	GUIStyle AddButtonStyle
 	{
 		get
@@ -228,7 +228,7 @@ public class EditorSceneLoader : EditorWindow
 		}
 	}
 
-	GUIContent _plusIcon = null;
+	static GUIContent _plusIcon = null;
 	GUIContent PlusIcon
 	{
 		get
@@ -239,7 +239,7 @@ public class EditorSceneLoader : EditorWindow
 		}
 	}
 
-	GUIContent _minusIcon = null;
+	static GUIContent _minusIcon = null;
 	GUIContent MinusIcon
 	{
 		get
@@ -251,7 +251,7 @@ public class EditorSceneLoader : EditorWindow
 	}
 
 	// ---
-	GUIStyle _playButtonStyle = null;
+	static GUIStyle _playButtonStyle = null;
 	GUIStyle PlayButtonStyle
 	{
 		get
@@ -265,19 +265,19 @@ public class EditorSceneLoader : EditorWindow
 		}
 	}
 
-	GUIContent _playIcon = null;
+	static GUIContent _playIcon = null;
 	GUIContent PlayIcon
 	{
 		get
 		{
 			if (_playIcon == null)
-				_playIcon = EditorGUIUtility.IconContent("PlayButton On");
+				_playIcon = EditorGUIUtility.IconContent("PlayButton");
 			return _playIcon;
 		}
 	}
 
 	// ---
-	GUIStyle _folderButtonStyle = null;
+	static GUIStyle _folderButtonStyle = null;
 	GUIStyle FolderButtonStyle
 	{
 		get
@@ -291,7 +291,7 @@ public class EditorSceneLoader : EditorWindow
 		}
 	}
 
-	GUIContent _folderIcon = null;
+	static GUIContent _folderIcon = null;
 	GUIContent FolderIcon
 	{
 		get
@@ -303,7 +303,7 @@ public class EditorSceneLoader : EditorWindow
 	}
 
 	// ---
-	GUIStyle _separatorStyle = null;
+	static GUIStyle _separatorStyle = null;
 	GUIStyle SeparatorStyle
 	{
 		get
