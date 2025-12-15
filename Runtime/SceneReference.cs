@@ -16,7 +16,7 @@ public class SceneReference : ScriptableObject
 	/// <summary> Llama al IsosSceneManager para que cargue esta escena. </summary>
 	public virtual void LoadScene()
 	{
-		var manager = FindObjectOfType<IsosSceneManager>();
+		var manager = FindFirstObjectByType<IsosSceneManager>();
 
 		if (manager != null)
 			manager.LoadScene(sceneName, false);
@@ -27,7 +27,7 @@ public class SceneReference : ScriptableObject
 	/// <summary> Llama al IsosSceneManager para que cargue esta escena pasando por la panalla de carga. </summary>
 	public virtual void LoadSceneAsync()
 	{
-		var manager = FindObjectOfType<IsosSceneManager>();
+		var manager = FindFirstObjectByType<IsosSceneManager>();
 
 		if (manager != null)
 			manager.LoadScene(sceneName, true);
@@ -38,7 +38,7 @@ public class SceneReference : ScriptableObject
 	/// <summary> Llama al IsosSceneManager para que cargue esta escena usando un fade. </summary>
 	public virtual void FadeToScene()
 	{
-		var manager = FindObjectOfType<IsosSceneManager>();
+		var manager = FindFirstObjectByType<IsosSceneManager>();
 
 		if (manager != null)
 			manager.FadeToScene(sceneName, false);
@@ -49,7 +49,7 @@ public class SceneReference : ScriptableObject
 	/// <summary> Llama al IsosSceneManager para que cargue esta escena usando un fade y la pantalla de carga. </summary>
 	public virtual void FadeToSceneAsync()
 	{
-		var manager = FindObjectOfType<IsosSceneManager>();
+		var manager = FindFirstObjectByType<IsosSceneManager>();
 
 		if (manager != null)
 			manager.FadeToScene(sceneName, true);

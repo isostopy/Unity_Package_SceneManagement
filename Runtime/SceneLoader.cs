@@ -34,7 +34,7 @@ public class SceneLoader : MonoBehaviour
 	private void Start()
 	{
 		// Busca el manager.
-		manager = FindObjectOfType<IsosSceneManager>();
+		manager = FindFirstObjectByType<IsosSceneManager>();
 
 		// Si se ha indicado, cargar la escena automaticamente.
 		if (loadOnStart)

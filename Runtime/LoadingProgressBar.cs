@@ -15,7 +15,7 @@ public class LoadingProgressBar : MonoBehaviour
 	// -----------------------------------------------------------------
 	private void Start()
 	{
-		manager = FindObjectOfType<IsosSceneManager>();
+		manager = FindFirstObjectByType<IsosSceneManager>();
 
 		if (loadingBar == null)
 			Debug.LogError("LoadingProgressBar [" + gameObject.name + "] no tiene asignada una LoadingBar", this);
